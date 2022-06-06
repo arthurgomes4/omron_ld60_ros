@@ -1,32 +1,20 @@
 <launch>
-<!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="paused" default="false"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui" default="true"/>
-  <arg name="headless" default="false"/>
-  <arg name="debug" default="false"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!-- <arg name="world_name" value="$(find pkg_techfest_imc)/world/my_world.world"/> -->
-    <arg name="debug" value="$(arg debug)" />
-    <arg name="gui" value="$(arg gui)" />
-    <arg name="paused" value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
-    <arg name="headless" value="$(arg headless)"/>
+    <!-- <arg name="world_name" value="$(find omron_ld60_description)/worlds/bullet_world.world"/> -->
+    <arg name="extra_gazebo_args" value="--verbose"/>
   </include>
-
 
   <param name="robot_description" command="xacro $(find omron_ld60_description)/models/LD60_castors.xacro"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-    respawn="false" output="screen"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false"/>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omron_ld60_description)/config/default.rviz"/>
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-x 0 -y 0 -z 0 -Y 0 -urdf -model ld60_castors -param robot_description" respawn="false" output="screen" />
+        args="-x 0 -y 0 -z 0 -Y 0 -urdf -model ld60_castors -param robot_description" respawn="false"/>
 
 </launch>

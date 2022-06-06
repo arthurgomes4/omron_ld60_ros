@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="LD60_no_castors">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ld60_castors">
 
   <xacro:property name="pkg_name" value="omron_ld60_description" />
   <xacro:property name="mesh_file" value="LD_Platform.STL" />
@@ -27,6 +27,53 @@
   <xacro:property name="bk_castor_offset_y" value="0.156" />
   <xacro:property name="bk_castor_offset_z" value="0.049" />
 
+  <xacro:property name="axis_offset" value="0.025"/>
+  <xacro:property name="wheel_collision_scaler" value="0.01"/>
+  <xacro:property name="drive_wheel_height_offset" value="0.001"/>
+
+  <!-- extra links + joints for castors -->
+  <xacro:macro name="castor_base" params="name parent xyz">
+    <link name="${name}">
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001"/>
+      </inertial>
+    </link>
+    <joint name="${parent}_to_${name}" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- castor base to castor wheels -->
+  <xacro:macro name="castor_wheel" params="name parent xyz">
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <cylinder length="${castor_wh_width}" radius="${castor_wh_radius}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="${castor_wh_width*wheel_collision_scaler}" radius="${castor_wh_radius}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="0.000204" ixy="0.0" ixz="0.0" iyy="0.000204" iyz="0.0" izz="0.000306"/>
+      </inertial>
+    </link>
+    <joint name="${parent}_to_${name}" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}" rpy="-1.57 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
   </material>
@@ -40,6 +87,12 @@
   <link name="base_link">
   </link>
 
+  <joint name="base_to_main_body" type="fixed">
+      <parent link="base_link"/>
+      <child link="main_body"/>
+      <origin xyz="${main_body_base_joint_x} ${main_body_base_joint_y} ${main_body_base_joint_z}"/>
+  </joint>
+  
   <link name="main_body">
     <visual>
       <origin xyz="0 0 0" rpy="${PI_2} 0 ${PI_2}" />
@@ -54,12 +107,6 @@
     </inertial>
   </link>
 
-  <joint name="main_body_to_base" type="fixed">
-    <parent link="base_link"/>
-    <child link="main_body"/>
-    <origin xyz="${main_body_base_joint_x} ${main_body_base_joint_y} ${main_body_base_joint_z}"/>
-  </joint>
-
   <link name="left_wheel">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -70,7 +117,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="${drive_wh_width}" radius="${drive_wh_radius}"/>
+        <cylinder length="${drive_wh_width*wheel_collision_scaler}" radius="${drive_wh_radius}"/>
       </geometry>
     </collision>
     <inertial>
@@ -83,7 +130,7 @@
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="main_body"/>
     <child link="left_wheel"/>
-    <origin rpy="-1.57 0 0" xyz="${drive_wh_joint_x} ${drive_wh_joint_y} ${drive_wh_joint_z}"/>
+    <origin rpy="-1.57 0 0" xyz="${drive_wh_joint_x} ${drive_wh_joint_y} ${drive_wh_joint_z + drive_wheel_height_offset}"/>
   </joint> 
 
   <link name="right_wheel">
@@ -96,7 +143,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="${drive_wh_width}" radius="${drive_wh_radius}"/>
+        <cylinder length="${drive_wh_width*wheel_collision_scaler}" radius="${drive_wh_radius}"/>
       </geometry>
     </collision>
     <inertial>
@@ -109,64 +156,46 @@
     <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="main_body"/>
     <child link="right_wheel"/>
-    <origin rpy="-1.57 0 0" xyz="${drive_wh_joint_x} -${drive_wh_joint_y} ${drive_wh_joint_z}"/>
+    <origin rpy="-1.57 0 0" xyz="${drive_wh_joint_x} -${drive_wh_joint_y} ${drive_wh_joint_z + drive_wheel_height_offset}"/>
   </joint>
-
-  <xacro:property name="axis_offset" value="0.025"/>
-
-  <!-- extra links + joints for castors -->
-  <xacro:macro name="castor_base" params="name parent xyz">
-
-    <link name="${name}"/>
-
-    <joint name="${parent}_to_${name}" type="fixed">
-      <parent link="${parent}"/>
-      <child link="${name}"/>
-      <origin xyz="${xyz}"/>
-      <axis xyz="0 0 1"/>
-    </joint>
-
-  </xacro:macro>
 
   <xacro:castor_base name="lf_castor_base" parent="main_body" xyz="${fr_castor_offset_x + axis_offset} ${fr_castor_offset_y} -${fr_castor_offset_z}"/>
   <xacro:castor_base name="rf_castor_base" parent="main_body" xyz="${fr_castor_offset_x + axis_offset} -${fr_castor_offset_y} -${fr_castor_offset_z}"/>
   <xacro:castor_base name="lb_castor_base" parent="main_body" xyz="-${bk_castor_offset_x - axis_offset} ${bk_castor_offset_y} -${bk_castor_offset_z}"/>
   <xacro:castor_base name="rb_castor_base" parent="main_body" xyz="-${bk_castor_offset_x - axis_offset} -${bk_castor_offset_y} -${bk_castor_offset_z}"/>
-
-  <!-- castor base to castor wheels -->
-  <xacro:macro name="castor_wheel" params="name parent xyz">
-
-    <link name="${name}">
-      <visual>
-        <geometry>
-          <cylinder length="${castor_wh_width}" radius="${castor_wh_radius}"/>
-        </geometry>
-        <material name="black"/>
-      </visual>
-      <collision>
-        <geometry>
-          <cylinder length="${castor_wh_width}" radius="${castor_wh_radius}"/>
-        </geometry>
-      </collision>
-      <inertial>
-        <mass value="${wheel_mass}"/>
-        <inertia ixx="0.000204" ixy="0.0" ixz="0.0" iyy="0.000204" iyz="0.0" izz="0.000306"/>
-      </inertial>
-    </link>
-
-    <joint name="${parent}_to_${name}" type="continuous">
-      <parent link="${parent}"/>
-      <child link="${name}"/>
-      <origin xyz="${xyz}" rpy="-1.57 0 0"/>
-      <axis xyz="0 0 1"/>
-    </joint> 
-
-  </xacro:macro>
-
+  
   <xacro:castor_wheel name="lf_castor_wheel" parent="lf_castor_base" xyz="-${axis_offset} 0 0"/>
   <xacro:castor_wheel name="rf_castor_wheel" parent="rf_castor_base" xyz="-${axis_offset} 0 0"/>
   <xacro:castor_wheel name="lb_castor_wheel" parent="lb_castor_base" xyz="-${axis_offset} 0 0"/>
   <xacro:castor_wheel name="rb_castor_wheel" parent="rb_castor_base" xyz="-${axis_offset} 0 0"/>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="main_body">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="lf_castor_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="rf_castor_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="lb_castor_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="rb_castor_wheel">
+    <material>Gazebo/Black</material>
+  </gazebo>
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -174,15 +203,15 @@
       <leftJoint>left_wheel_joint</leftJoint><!-- Name of left joint, defaults to `left_joint` -->
       <rightJoint>right_wheel_joint</rightJoint><!-- Name of right joint, defaults to `right_joint` -->
       <wheelSeparation>${2*drive_wh_joint_y}</wheelSeparation><!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
-      <wheelDiameter>${drive_wh_radius/2}</wheelDiameter><!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
+      <wheelDiameter>${drive_wh_radius*2}</wheelDiameter><!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
       <wheelAcceleration>1.0</wheelAcceleration><!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
       <wheelTorque>20</wheelTorque><!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
       <commandTopic>cmd_vel</commandTopic><!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
       <odometryTopic>odom</odometryTopic><!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
-      <odometryFrame>odom</odometryFrame><!-- Odometry frame, defaults to `odom` -->
+      <odometryFrame>odom_frame</odometryFrame><!-- Odometry frame, defaults to `odom` -->
       <robotBaseFrame>base_link</robotBaseFrame><!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
       <odometrySource>1</odometrySource><!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
-      <publishWheelTF>true</publishWheelTF><!-- Set to true to publish transforms for the wheel links, defaults to false -->
+      <publishWheelTF>false</publishWheelTF><!-- Set to true to publish transforms for the wheel links, defaults to false -->
       <publishOdom>true</publishOdom><!-- Set to true to publish transforms for the odometry, defaults to true -->
       <publishWheelJointState>true</publishWheelJointState><!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
       <legacyMode>false</legacyMode><!-- Set to true to swap right and left wheels, defaults to true -->

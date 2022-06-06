@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <gravity>0 0 -9.8</gravity>
+    <physics type="dart">
+    <real_time_update_rate>1000.0</real_time_update_rate>
+    <max_contacts>20</max_contacts>
+    <dart>
+      <solver>
+        <use_dynamic_moi_scaling>0</use_dynamic_moi_scaling>
+        <min_step_size>0.0001</min_step_size>
+        <type>quick</type>
+        <iters>100</iters>
+        <friction_model>pyramid_model</friction_model>
+        <sor>1.3</sor>
+        <precon_iters>0</precon_iters>
+      </solver>
+      <constraints>
+        <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+        <contact_surface_layer>0.001</contact_surface_layer>
+        <cfm>2.0</cfm>
+        <erp>0.2</erp>
+      </constraints>
+    </dart>
+    <real_time_factor>1.0</real_time_factor>
+    <max_step_size>0.001</max_step_size>
+  </physics>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+  </world>
+</sdf>
