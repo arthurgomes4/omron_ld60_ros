@@ -29,7 +29,7 @@
 
   <xacro:property name="axis_offset" value="0.025"/>
   <xacro:property name="wheel_collision_scaler" value="0.01"/>
-  <xacro:property name="drive_wheel_height_offset" value="0.001"/>
+  <xacro:property name="drive_wheel_height_offset" value="0.0005"/>
 
   <!-- extra links + joints for castors -->
   <xacro:macro name="castor_base" params="name parent xyz">
