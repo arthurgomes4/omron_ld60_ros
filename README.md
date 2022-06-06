@@ -17,5 +17,10 @@ Clone this package into your local workspace's `src` directory. Build and source
 * `LD60_castors.xacro`: castors enabled + diff drive.
 * `LD60_no_castors.xacro`: castors disabled + diff drive.
 
+## Importing Model into Unity
+* use the command `xacro LD60_castors.xacro > LD60_castors.urdf` to generate the urdf.
+* In the generated urdf change the line `<mesh filename="package://omron_ld60_description/models/meshes/LD_Platform.STL" />` to `<mesh filename="meshes/LD_Platform.STL"/>`.
+
+
 [![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
