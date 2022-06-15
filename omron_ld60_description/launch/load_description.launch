@@ -1,0 +1,4 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find omron_ld60_description)/models/LD60_castors.xacro'" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omron_ld60_description)/config/config1.rviz"/>
+</launch>

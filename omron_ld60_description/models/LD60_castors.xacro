@@ -169,6 +169,34 @@
   <xacro:castor_wheel name="lb_castor_wheel" parent="lb_castor_base" xyz="-${axis_offset} 0 0"/>
   <xacro:castor_wheel name="rb_castor_wheel" parent="rb_castor_base" xyz="-${axis_offset} 0 0"/>
 
+  <!-- Lidar Frames -->
+
+  <link name="lower_laser">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001"/>
+    </inertial>
+  </link>
+
+  <link name="upper_laser">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001"/>
+    </inertial>
+  </link>
+
+  <joint name="main_body_to_upper_laser" type="fixed">
+    <parent link="main_body"/>
+    <child link="upper_laser"/>
+    <origin xyz="0.27 0 0.11"/>
+  </joint>
+
+  <joint name="main_body_to_lower_laser" type="fixed">
+    <parent link="main_body"/>
+    <child link="lower_laser"/>
+    <origin xyz="0.27 0 -0.03"/>
+  </joint>
+
   <gazebo reference="right_wheel">
     <material>Gazebo/Black</material>
   </gazebo>
