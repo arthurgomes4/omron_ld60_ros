@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+<!-- Sun -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+<!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+<!-- Empty World 1 -->
+    <include>
+      <uri>model://world1</uri>
+      <pose>0 0 0 0 0 0</pose>
+      <static>true</static>
+    </include>
+
+  </world>
+</sdf>

@@ -1,6 +1,16 @@
 [![Image](https://img.shields.io/badge/ROS-Noetic-purple.svg)](https://github.com/arthurgomes4)
 [![Image](https://img.shields.io/badge/Gazebo-11.0.0-orange.svg)](https://github.com/arthurgomes4)
 
+# TO DO  
+Goal: To get frontier explore working in gazebo  
+
+Checklist  
+- [ ] Get omron-model in gazebo world (takshak)  
+- [ ] Get navigation working  
+    - gmapping
+    - move_base
+- [ ] Get Exploration working
+
 # Omron_LD60_ROS
 miscellaneous ROS packages for the Omron LD60 UGV
 
