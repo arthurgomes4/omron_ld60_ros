@@ -83,11 +83,17 @@
   <material name="white">
     <color rgba="1 1 1 1"/>
   </material>
+  
+  <!-- <link name="ignore_this_link"/>
+  
+  <joint name="ignore_this_joint" type="fixed">
+  	<parent link="ignore_this_link"/>
+  	<child link="base_link"/>
+  </joint> -->
+  
+  <link name="base_link"/>
 
-  <link name="base_link">
-  </link>
-
-  <joint name="base_to_main_body" type="fixed">
+  <joint name="base_link_to_main_body" type="fixed">
       <parent link="base_link"/>
       <child link="main_body"/>
       <origin xyz="${main_body_base_joint_x} ${main_body_base_joint_y} ${main_body_base_joint_z}"/>
