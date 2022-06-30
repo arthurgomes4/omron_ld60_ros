@@ -5,8 +5,8 @@
 Goal: To get frontier explore working in gazebo  
 
 Checklist  
-- [ ] Get omron-model in gazebo world (takshak)  
-- [ ] Get navigation working  
+- [x] Get omron-model in gazebo world (takshak)  
+- [x] Get navigation working  
     - gmapping
     - move_base
 - [ ] Get Exploration working

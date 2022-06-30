@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="scan_topic" default="/laser/scan" />
+
+  <rosparam param="use_sim_time">true</rosparam>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
+    <rosparam command="load" file="$(find omron_ld60_navigation)/param/gmapping/gmapping.yaml"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+
+</launch>
