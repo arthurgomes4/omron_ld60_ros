@@ -1,7 +1,7 @@
 [![Image](https://img.shields.io/badge/ROS-Noetic-purple.svg)](https://github.com/arthurgomes4)
 [![Image](https://img.shields.io/badge/Gazebo-11.0.0-orange.svg)](https://github.com/arthurgomes4)
 
-ADD IMAGE
+<p align="center"> <img src="https://github.com/arthurgomes4/omron_ld60_ros/blob/main/Data/omronModel.png" width="400"/> </p>
 
 # Omron LD-60 ROS  
 ROS Package for the Omron LD60 AMR.  
@@ -33,6 +33,10 @@ catkin_make
 source devel/setup.bash        
 ```
 ### Run the launch file  
+` roslaunch omron_ld60_ros launch_all.launch `
+
+## Demo  
+![](https://github.com/arthurgomes4/omron_ld60_ros/blob/main/Data/Movebase_gmap.gif)
 
 ## Explanation  
 ### Launch Files
