@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ld60_castors">
 
-  <xacro:property name="pkg_name" value="omron_ld60_description" />
+  <xacro:property name="pkg_name" value="omron_ld60_ros" />
   <xacro:property name="mesh_file" value="LD_Platform.STL" />
 
   <xacro:property name="PI" value="3.1415926535897" />

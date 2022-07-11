@@ -1,18 +1,18 @@
 <launch>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!-- <arg name="world_name" value="$(find omron_ld60_description)/worlds/bullet_world.world"/> -->
+    <!-- <arg name="world_name" value="$(find omron_ld60_ros)/worlds/bullet_world.world"/> -->
     <arg name="extra_gazebo_args" value="--verbose"/>
   </include>
 
-  <param name="robot_description" command="xacro $(find omron_ld60_description)/models/LD60_no_castors.xacro"/>
+  <param name="robot_description" command="xacro $(find omron_ld60_ros)/models/LD60_no_castors.xacro"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false"/>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omron_ld60_description)/config/default.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omron_ld60_ros)/config/default.rviz"/>
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x 0 -y 0 -z 0 -Y 0 -urdf -model ld60_castors -param robot_description" respawn="false"/>

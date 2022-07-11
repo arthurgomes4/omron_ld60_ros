@@ -249,7 +249,7 @@ Visualization Manager:
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
-      Line Style: Billboards
+      Line Style: Lines
       Line Width: 0.05000000074505806
       Name: Path
       Offset:
@@ -333,9 +333,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.150397777557373
+      Pitch: 1.1603974103927612
       Target Frame: <Fixed Frame>
-      Yaw: 2.0403544902801514
+      Yaw: 4.51035737991333
     Saved: ~
 Window Geometry:
   Displays:
