@@ -35,13 +35,13 @@ source devel/setup.bash
 ### Run the launch file  
 
 ## Explanation  
-
-
 ### Launch Files
 * `display_castors.launch`: launch the robot with castors enabled in rviz with joint publisher gui.
 * `display_no_castors.launch`: launch the robot with castors disabled in rviz with joint publisher gui.
 * `gazebo_castors.launch`: launch the robot in a gazebo simluation and rviz visualisation with castors enabled and diff drive plugin.
-* `gazebo_no_castors.launch`: launch the robot in a gazebo simluation and rviz visualisation with castors disabled and diff drive plugin.
+* `gazebo_no_castors.launch`: launch the robot in a gazebo simluation and rviz visualisation with castors disabled and diff drive plugin.  
+* `move_base.launch`: Launches the motion planner for the robot. Set 2D Nav goals in rviz to observe this  
+* `gmapping.launch`: Launches the SLAM node and maps the environment.  
 
 ### Robot Models
 * `LD60_castors.xacro`: castors enabled + diff drive.
@@ -49,7 +49,7 @@ source devel/setup.bash
 
 ### Importing Model into Unity
 * use the command `xacro LD60_castors.xacro > LD60_castors.urdf` to generate the urdf.
-* In the generated urdf change the line `<mesh filename="package://omron_ld60_description/models/meshes/LD_Platform.STL" />` to `<mesh filename="meshes/LD_Platform.STL"/>`.
+* In the generated urdf change the line `<mesh filename="package://omron_ld60_ros/models/meshes/LD_Platform.STL" />` to `<mesh filename="meshes/LD_Platform.STL"/>`.
 
 
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
