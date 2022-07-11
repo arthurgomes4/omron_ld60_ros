@@ -1,7 +1,7 @@
 [![Image](https://img.shields.io/badge/ROS-Noetic-purple.svg)](https://github.com/arthurgomes4)
 [![Image](https://img.shields.io/badge/Gazebo-11.0.0-orange.svg)](https://github.com/arthurgomes4)
 
-<p align="center"> <img src="https://github.com/arthurgomes4/omron_ld60_ros/blob/main/Data/omronModel.png" width="400"/> </p>
+<p align="center"> <img src="https://github.com/arthurgomes4/omron_ld60_ros/blob/main/Data/omronModel.png" width="400"/>     <img src="https://github.com/arthurgomes4/omron_ld60_ros/blob/main/Data/omronModel2.png" width="400"/> </p>
 
 # Omron LD-60 ROS  
 ROS Package for the Omron LD60 AMR.  
