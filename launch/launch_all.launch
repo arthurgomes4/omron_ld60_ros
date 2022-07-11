@@ -1,0 +1,5 @@
+<launch>
+<include file="$(find omron_ld60_ros)/launch/gazebo_castors.launch"/>
+<include file="$(find omron_ld60_ros)/launch/move_base.launch"/>
+<include file="$(find omron_ld60_ros)/launch/gmapping.launch"/>
+</launch>
