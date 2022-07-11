@@ -3,6 +3,7 @@
 
 ADD IMAGE
 
+<<<<<<< HEAD
 # Omron LD-60 ROS  
 ROS Package for the Omron LD60 AMR.  
 
