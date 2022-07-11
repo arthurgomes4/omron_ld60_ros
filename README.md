@@ -3,7 +3,6 @@
 
 ADD IMAGE
 
-<<<<<<< HEAD
 # Omron LD-60 ROS  
 ROS Package for the Omron LD60 AMR.  
 
@@ -22,7 +21,6 @@ Install [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) from this o
 To install additional ROS Packages, run this command  
 `sudo apt install ros-noetic-xacro ros-noetic-move-base ros-noetic-gmapping ros-noetic-explore-lite ros-noetic-rviz`  
 
-
 ## Usage  
 
 ### Install the package  
@@ -33,7 +31,6 @@ git clone https://github.com/arthurgomes4/Omron_LD60_ROS.git
 cd ..  
 catkin_make  
 source devel/setup.bash        
-
 ```
 ### Run the launch file  
 
@@ -55,5 +52,5 @@ source devel/setup.bash
 * In the generated urdf change the line `<mesh filename="package://omron_ld60_description/models/meshes/LD_Platform.STL" />` to `<mesh filename="meshes/LD_Platform.STL"/>`.
 
 
-[![Image](https://img.shields.io/badge/developed%20using-VSCode-green.svg)](https://code.visualstudio.com/)
 [![Image](https://img.shields.io/badge/Developer-arthurgomes4-blue.svg)](https://github.com/arthurgomes4)
+[![Image](https://img.shields.io/badge/Developer-Pranjalmishra30-blue.svg)](https://github.com/Pranjalmishra30)
