@@ -9,7 +9,14 @@ Checklist
 - [x] Get navigation working  
     - gmapping
     - move_base
-- [ ] Get Exploration working
+- [ ] Get Exploration working  
+- [ ] Rework readme
+- [ ] Add images  
+- [ ] Installation guide  
+- [ ] Usage guide  
+- [ ] References  
+- [ ] New map/maze  
+
 
 # Omron_LD60_ROS
 miscellaneous ROS packages for the Omron LD60 UGV
