@@ -27,7 +27,7 @@ To install additional ROS Packages, run this command
 Clone the ROS package into your ROS workspace and build.  
 ```
 cd ~/catkin_ws/src  
-git clone https://github.com/arthurgomes4/Omron_LD60_ROS.git  
+git clone https://github.com/arthurgomes4/omron_ld60_ros.git  
 cd ..  
 catkin_make  
 source devel/setup.bash        
